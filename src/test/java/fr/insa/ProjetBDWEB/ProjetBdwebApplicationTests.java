@@ -1,4 +1,4 @@
-package insa.fr.ProjetBDWEB;
+package fr.insa.ProjetBDWEB;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
