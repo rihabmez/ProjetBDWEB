@@ -14,7 +14,7 @@ public class Carte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCarte;
-    private Integer NumCarte;
+    private Integer numCarte;
     @ManyToOne
     private Compte compte;
     private Integer plafond ;

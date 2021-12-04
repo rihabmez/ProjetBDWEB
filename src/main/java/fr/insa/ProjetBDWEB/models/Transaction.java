@@ -2,6 +2,7 @@ package fr.insa.ProjetBDWEB.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -14,7 +15,8 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTransaction;
     private String type;
-    private String date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
     @ManyToOne
     private Compte compteBenef;
     private Integer montant;
