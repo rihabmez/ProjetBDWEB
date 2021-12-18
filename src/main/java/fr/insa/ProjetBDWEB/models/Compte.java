@@ -1,5 +1,6 @@
 package fr.insa.ProjetBDWEB.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,15 +15,18 @@ import java.util.List;
 public class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCompte;
-    private String IBAN;
+    private Integer idcompte;
+    private String iban;
     private boolean comptejoint;
     @ManyToMany(mappedBy = "comptes")
-    private List<Client> Clients;
+    @JsonIgnore
+    private List<Client> clients;
     @OneToMany(mappedBy = "compte")
+    @JsonIgnore
     private List<Carte> cartes;
-    @OneToMany(mappedBy = "compteBenef")
-    private List<Transaction> Transactions;
+    @OneToMany(mappedBy = "comptebenef")
+    @JsonIgnore
+    private List<Transaction> transactions;
     private Integer solde;
     private Integer decouvert;
 

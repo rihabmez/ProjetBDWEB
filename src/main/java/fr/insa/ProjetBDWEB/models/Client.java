@@ -1,5 +1,6 @@
 package fr.insa.ProjetBDWEB.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,16 +15,18 @@ import java.util.List;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idClient;
+    private Integer idclient;
     private String nom;
     private String prenom;
     private Integer age;
     private String adresse;
     private Integer numtel;
-    private Integer mail ;
+    private String mail ;
     @ManyToMany
+    @JsonIgnore
     private List<Compte> comptes ;
-    @ManyToMany
-    private List<Agence> Agences ;
+    @ManyToOne
+    @JsonIgnore
+    private Agence agence ;
 
 }

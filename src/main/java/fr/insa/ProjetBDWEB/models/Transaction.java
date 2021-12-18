@@ -1,4 +1,5 @@
 package fr.insa.ProjetBDWEB.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,11 +14,12 @@ import java.util.Date;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idTransaction;
+    private Integer idtransaction;
     private String type;
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     @ManyToOne
-    private Compte compteBenef;
+    @JsonIgnore
+    private Compte comptebenef;
     private Integer montant;
 }

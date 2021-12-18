@@ -1,5 +1,6 @@
 package fr.insa.ProjetBDWEB.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,11 +14,12 @@ import javax.persistence.*;
 public class Carte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCarte;
-    private Integer numCarte;
+    private Integer idcarte;
+    private Integer numcarte;
     @ManyToOne
+    @JsonIgnore
     private Compte compte;
     private Integer plafond ;
-    private String MDP;
+    private String mdp;
 
 }

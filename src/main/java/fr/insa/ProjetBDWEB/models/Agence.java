@@ -1,5 +1,6 @@
 package fr.insa.ProjetBDWEB.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,10 +15,10 @@ import java.util.List;
 public class Agence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAgence;
+    private Integer idagence;
     private String nom;
     private String adresse;
-    private String codeAgence;
-    @ManyToMany(mappedBy = "Agences")
+    private Integer codeagence;
+    @OneToMany(mappedBy = "agence")
     private List<Client> clients;
 }
