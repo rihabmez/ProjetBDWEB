@@ -1,8 +1,10 @@
 package fr.insa.ProjetBDWEB.ressources;
 
+import fr.insa.ProjetBDWEB.models.Agence;
 import fr.insa.ProjetBDWEB.models.Compte;
 import fr.insa.ProjetBDWEB.models.Compte;
 import fr.insa.ProjetBDWEB.repositories.CompteRepository;
+import fr.insa.ProjetBDWEB.services.AgenceService;
 import fr.insa.ProjetBDWEB.services.CompteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,14 +14,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("compte")
+@RequestMapping("comptes")
 public class CompteRessource {
     @Autowired
     private CompteService compteService;
     @Autowired
     private CompteRepository compteRepository;
 
-    @GetMapping("/comptes")
+    private AgenceService agenceService;
+
+    @GetMapping()
     public List
             <Compte> getComptes(){
         return compteService.getComptes();
@@ -34,8 +38,15 @@ public class CompteRessource {
         compteService.deleteCompte(id);
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/compte")
+    @PostMapping
     public ResponseEntity<Compte> createCompte(@RequestBody Compte compte) {
+        //CALCULE IBAN
+       /* String codeagence= agenceService.getCodeagence();
+        String codebanque= "54678";
+        String ibancalcule = "FR76"+codebanque+ 15*codeagence +"10313400399 49" ;
+        compte.setIban(ibancalcule);
+      */
+
         try {
             Compte _compte = compteRepository
                     .save(new Compte(compte.getIdcompte(),compte.getIban(),false, compte.getClients(), compte.getCartes(), compte.getTransactions(), compte.getSolde(),compte.getDecouvert()));

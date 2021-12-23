@@ -1,5 +1,6 @@
 package fr.insa.ProjetBDWEB.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -21,4 +22,9 @@ public class Agence {
     private Integer codeagence;
     @OneToMany(mappedBy = "agence")
     private List<Client> clients;
+    //pour pouvoir stocker les ids au lieu d'objet json dans POSTmapping
+    @JsonCreator
+    public Agence(int id) {
+        this.idagence = id;
+    }
 }

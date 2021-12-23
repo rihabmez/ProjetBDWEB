@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("transaction")
+@RequestMapping("transactions")
 public class TransactionRessource {
     @Autowired
     private TransactionService transactionService;
     @Autowired
     private TransactionRepository transactionRepository;
-    @GetMapping("/transactions")
+    @GetMapping()
     public List<Transaction> gettransactions(){
         return transactionService.getTransactions();
     }
@@ -32,7 +32,7 @@ public class TransactionRessource {
         transactionService.deleteTransaction(id);
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/transaction")
+    @PostMapping
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
         try {
             Transaction _transaction = transactionRepository

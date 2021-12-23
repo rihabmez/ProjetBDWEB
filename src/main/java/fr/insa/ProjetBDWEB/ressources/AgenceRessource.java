@@ -3,6 +3,7 @@ package fr.insa.ProjetBDWEB.ressources;
 import fr.insa.ProjetBDWEB.models.Agence;
 
 import fr.insa.ProjetBDWEB.repositories.AgenceRepository;
+import fr.insa.ProjetBDWEB.repositories.ClientRepository;
 import fr.insa.ProjetBDWEB.services.AgenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,15 +13,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("agence")
+@RequestMapping("agences")
 public class AgenceRessource {
+    @Autowired
+    private ClientRepository cp ;
+
     @Autowired
     private AgenceService agenceService;
 
     @Autowired
     private AgenceRepository agenceRepository;
 
-    @GetMapping("/agences")
+    @GetMapping()
     public List<Agence> getAgences(){
         return this.agenceService.getAgences();
     }
@@ -35,7 +39,7 @@ public class AgenceRessource {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/agence")
+    @PostMapping
     public ResponseEntity<Agence> createAgence(@RequestBody Agence agence) {
         try {
             Agence _agence = agenceRepository
@@ -45,5 +49,11 @@ public class AgenceRessource {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /*@PostMapping
+    public Agence createAgence(@RequestBody AgenceCreateModel AgenceToCreate) throws Exception {
+        return this.agenceRepository.save(AgenceToCreate.getAgence());
+    }*/
+
 
 }

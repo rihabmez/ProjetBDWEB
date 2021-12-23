@@ -1,5 +1,6 @@
 package fr.insa.ProjetBDWEB.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -29,5 +30,11 @@ public class Compte {
     private List<Transaction> transactions;
     private Integer solde;
     private Integer decouvert;
+
+    //pour pouvoir stocker les ids au lieu d'objet json dans POSTmapping
+    @JsonCreator
+    public Compte(int id) {
+        this.idcompte = id;
+    }
 
 }

@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("client")
+@RequestMapping("clients")
 public class ClientRessource {
     @Autowired
     private ClientService clientService;
     @Autowired
     private ClientRepository clientRepository;
-     @GetMapping("/clients")
+     @GetMapping()
      public List<Client> getClients(){
          return this.clientService.getClients();
      }
@@ -34,7 +34,7 @@ public class ClientRessource {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/client")
+    @PostMapping
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
         try {
             Client _client = clientRepository

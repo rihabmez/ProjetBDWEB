@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @RestController
-@RequestMapping("carte")
+@RequestMapping("cartes")
 public class CarteRessource {
     @Autowired
     private CarteService carteService;
@@ -20,7 +23,17 @@ public class CarteRessource {
     @Autowired
     private CarteRepository carteRepository;
 
-    @GetMapping("/cartes")
+    PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();;
+
+    public CarteRessource(CarteRepository carteRepository,CarteService carteService){
+        this.carteRepository= carteRepository;
+        this.carteService= carteService;
+
+        //Hashage du mot de passe
+        this.passwordEncoder = new BCryptPasswordEncoder();
+
+    }
+    @GetMapping()
     public List<Carte> getCartes(){
         return carteService.getCartes();
     }
@@ -36,8 +49,11 @@ public class CarteRessource {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/carte")
+    @PostMapping
     public ResponseEntity<Carte> createCarte(@RequestBody Carte carte) {
+        //hashage de mot de passe
+        String encodedPassword = this.passwordEncoder.encode(carte.getMdp());
+        carte.setMdp(encodedPassword);
         try {
             Carte _carte = carteRepository
                     .save(new Carte(carte.getIdcarte() ,carte.getNumcarte(), carte.getCompte(),carte.getPlafond(),carte.getMdp()));

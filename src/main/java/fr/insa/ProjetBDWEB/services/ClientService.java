@@ -17,6 +17,7 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
+
     public Client getClient(int id) throws Exception {
         return this.clientRepository.findById(id).orElseThrow(Exception::new);
     }

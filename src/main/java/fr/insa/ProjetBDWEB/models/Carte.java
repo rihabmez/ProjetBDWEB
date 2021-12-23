@@ -1,5 +1,6 @@
 package fr.insa.ProjetBDWEB.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -22,4 +23,9 @@ public class Carte {
     private Integer plafond ;
     private String mdp;
 
+    //pour pouvoir stocker les ids au lieu d'objet json dans POSTmapping
+    @JsonCreator
+    public Carte(int id) {
+        this.idcarte = id;
+    }
 }

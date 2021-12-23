@@ -7,6 +7,9 @@ import fr.insa.ProjetBDWEB.repositories.CarteRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +18,8 @@ import java.util.Optional;
 public class CarteService {
     @Autowired
     private CarteRepository carteRepository;
+
+
 
     public Carte getCarte(int id) throws Exception {
         return this.carteRepository.findById(id).orElseThrow(Exception::new);
@@ -28,7 +33,8 @@ public class CarteService {
         carteRepository.deleteById(id);
     }
 
-    public Carte saveCarte(Carte Carte){
+    public Carte save(Carte Carte){
+
         Carte savedCarte = carteRepository.save(Carte);
         return savedCarte;
     }
